@@ -94,11 +94,15 @@ namespace EM_REST_API
             httpWebRequest.Accept = "application/json";
             httpWebRequest.Method = "GET";
 
-            var response = (HttpWebResponse)httpWebRequest.GetResponse();
-
-            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            using (var response = (HttpWebResponse)httpWebRequest.GetResponse())
             {
-                data = streamReader.ReadToEnd();
+                using (var responseStream = response.GetResponseStream())
+                {
+                    using (var streamReader = new StreamReader(responseStream))
+                    {
+                        data = streamReader.ReadToEnd();
+                    }
+                }
             }
 
             return JToken.Parse(data);
@@ -124,11 +128,15 @@ namespace EM_REST_API
             httpWebRequest.Accept = "application/json";
             httpWebRequest.Method = "GET";
 
-            var response = (HttpWebResponse)httpWebRequest.GetResponse();
-
-            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            using (var response = (HttpWebResponse)httpWebRequest.GetResponse())
             {
-                data = streamReader.ReadToEnd();
+                using (var responseStream = response.GetResponseStream())
+                {
+                    using (var streamReader = new StreamReader(responseStream))
+                    {
+                        data = streamReader.ReadToEnd();
+                    }
+                }
             }
 
             return JToken.Parse(data);
